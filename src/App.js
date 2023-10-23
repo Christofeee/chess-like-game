@@ -3,18 +3,19 @@ import React, { useState } from 'react';
 function TicTacToe()
 {
     const [isGameWon, setIsGameWon] = useState(false);
-    let achievedCount = 0
-    let cells = new Array(5);   //1D array
+    let achievedCells = []
+    let cells = new Array(5)  //1D array
     let isOturn = true
 
     for (let i=0; i<cells.length; i++)      //2D array
     {
-        cells[i] = [];
-        for (let a=0; a<cells.length; a++)
-        {
-            cells[i][a] = null
-        }
+      cells[i] = [];
+      for (let a=0; a<cells.length; a++)
+      {
+        cells[i][a] = null
+      }
     }
+    
     console.log(cells) 
 
     function generateId(rowIndex,cellIndex) //to generate specific indexes for each cell
@@ -46,6 +47,14 @@ function TicTacToe()
         // disableButton()
     }
 
+    function updateCells(recievedCells, value)
+    {
+      for (let i=0; i<recievedCells.length; i++)
+      {
+        console.log(cells[recievedCells[i]])
+      }
+    }
+
     function checkMatched(x, y, cell)
     {
       if((cells[x][y] === cell))
@@ -69,19 +78,22 @@ function TicTacToe()
           if ((cells[x][y-1] === cell))
           {
             console.log("mathched")
+            console.log(achievedCells)
             return true
           } 
           if (cells[x][y-1]===null)
           {
             console.log("is null")
+            achievedCells = []
             return false
           } else {
             console.log("need to check more")
             --y
-            ++achievedCount
+            achievedCells.push([x, y])
           }
         } else {
-          console.log("Cant check back") 
+          console.log("Cant check back")
+          achievedCells = []
           return false
         }
       }
@@ -93,8 +105,16 @@ function TicTacToe()
       if (checkBack(x, y, cell))
       {
         console.log("Checkback found")
-        cells[x][y] = cell
-        document.getElementById(generateId(x,y-1)).innerHTML = cell
+        console.log(achievedCells)
+        updateCells(achievedCells, cell)
+        // inputArray(achievedCells, cell)
+        // console.log(cells)
+        // for(let i=y-1; i>achievedCount; i--)
+        // {
+        //   console.log(i, "will change resultss")
+        //   cells[x][i] = cell
+        //   document.getElementById(generateId(x,i)).innerHTML = cell
+        // }
       }
       
     }
