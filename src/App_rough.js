@@ -115,50 +115,24 @@ function TicTacToe()
         }
       }
     }
-
-    function checkFront(x, y, cell)
-    {
-      console.log("Checking Front, cell is", cell)
-      while (true)
-      {
-        console.log("checking index: ", y+1)
-        if (!((y+1) > 4))
-        {
-          if ((cells[x][y+1] === cell))
-          {
-            console.log("mathched")
-            console.log(achievedCells)
-            return true
-          } 
-          if (cells[x][y+1]===null)
-          {
-            console.log("is null")
-            achievedCells = []
-            return false
-          } else {
-            console.log("need to check more")
-            ++y
-            achievedCells.push([x, y])
-          }
-        } else {
-          console.log("Cant check front")
-          achievedCells = []
-          return false
-        }
-      }
-    }
     
     let winner
     function checkWin(x, y, cell)
     {
-      checkBack(x, y, cell)
-      console.log("Checkback found")
-      console.log(achievedCells)
-      updateCells(achievedCells, cell)
-      checkFront(x, y, cell)
-      console.log("Checkback found")
-      console.log(achievedCells)
-      updateCells(achievedCells, cell)
+      if (checkBack(x, y, cell))
+      {
+        console.log("Checkback found")
+        console.log(achievedCells)
+        updateCells(achievedCells, cell)
+        // inputArray(achievedCells, cell)
+        // console.log(cells)
+        // for(let i=y-1; i>achievedCount; i--)
+        // {
+        //   console.log(i, "will change resultss")
+        //   cells[x][i] = cell
+        //   document.getElementById(generateId(x,i)).innerHTML = cell
+        // }
+      }
       
     }
 
