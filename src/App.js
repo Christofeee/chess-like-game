@@ -147,19 +147,262 @@ function TicTacToe()
         }
       }
     }
+
+    function checkUp(x, y, cell)
+    {
+      console.log("Checking Up, cell is", cell)
+      while (true)
+      {
+        console.log("checking index: ", x-1)
+        if (Math.sign(x-1) !== -1)
+        {
+          if ((cells[x-1][y] === cell))
+          {
+            console.log("mathched")
+            console.log(achievedCells)
+            return true
+          } 
+          if (cells[x-1][y]===null)
+          {
+            console.log("is null")
+            achievedCells = []
+            return false
+          } else {
+            console.log("need to check more")
+            --x
+            achievedCells.push([x, y])
+          }
+        } else {
+          console.log("Cant check up")
+          achievedCells = []
+          return false
+        }
+      }
+    }
+
+    function checkDown(x, y, cell)
+    {
+      console.log("Checking Down, cell is", cell)
+      while (true)
+      {
+        console.log("checking index: ", x+1)
+        if (!((x+1) > 4))
+        {
+          if ((cells[x+1][y] === cell))
+          {
+            console.log("mathched")
+            console.log(achievedCells)
+            return true
+          } 
+          if (cells[x+1][y]===null)
+          {
+            console.log("is null")
+            achievedCells = []
+            return false
+          } else {
+            console.log("need to check more")
+            ++x
+            achievedCells.push([x, y])
+          }
+        } else {
+          console.log("Cant check down")
+          achievedCells = []
+          return false
+        }
+      }
+    }
+
+    function checkLeftUp(x, y, cell)
+    {
+      console.log("Checking LeftUp, cell is", cell)
+      while (true)
+      {
+        console.log("checking index: ", x-1, y-1)
+        if ((Math.sign(x-1) !== -1) && (Math.sign(y-1) !== -1))
+        {
+          if ((cells[x-1][y-1] === cell))
+          {
+            console.log("mathched")
+            console.log(achievedCells)
+            return true
+          } 
+          if (cells[x-1][y-1]===null)
+          {
+            console.log("is null")
+            achievedCells = []
+            return false
+          } else {
+            console.log("need to check more")
+            --x
+            --y
+            achievedCells.push([x, y])
+          }
+        } else {
+          console.log("Cant check LeftUp")
+          achievedCells = []
+          return false
+        }
+      }
+    }
+
+    function checkRightUp(x, y, cell)
+    {
+      console.log("Checking RightUp, cell is", cell)
+      while (true)
+      {
+        console.log("checking index: ", x-1, y+1)
+        if ((Math.sign(x-1) !== -1) && (!((y+1) > 4)))
+        {
+          if ((cells[x-1][y+1] === cell))
+          {
+            console.log("mathched")
+            console.log(achievedCells)
+            return true
+          } 
+          if (cells[x-1][y+1]===null)
+          {
+            console.log("is null")
+            achievedCells = []
+            return false
+          } else {
+            console.log("need to check more")
+            --x
+            ++y
+            achievedCells.push([x, y])
+          }
+        } else {
+          console.log("Cant check RightUp")
+          achievedCells = []
+          return false
+        }
+      }
+    }
+
+    function checkLeftDown(x, y, cell)
+    {
+      console.log("Checking RightUp, cell is", cell)
+      while (true)
+      {
+        console.log("checking index: ", x-1, y+1)
+        if ((Math.sign(y-1) !== -1) && (!((x+1) > 4)))
+        {
+          if ((cells[x+1][y-1] === cell))
+          {
+            console.log("mathched")
+            console.log(achievedCells)
+            return true
+          } 
+          if (cells[x+1][y-1]===null)
+          {
+            console.log("is null")
+            achievedCells = []
+            return false
+          } else {
+            console.log("need to check more")
+            ++x
+            --y
+            achievedCells.push([x, y])
+          }
+        } else {
+          console.log("Cant check leftdown")
+          achievedCells = []
+          return false
+        }
+      }
+    }
+
+    function CheckRightDown(x, y, cell)
+    {
+      console.log("Checking RightUp, cell is", cell)
+      while (true)
+      {
+        console.log("checking index: ", x-1, y+1)
+        if ((!((x+1) > 4)) && (!((y+1) > 4)))
+        {
+          if ((cells[x+1][y+1] === cell))
+          {
+            console.log("mathched")
+            console.log(achievedCells)
+            return true
+          } 
+          if (cells[x+1][y+1]===null)
+          {
+            console.log("is null")
+            achievedCells = []
+            return false
+          } else {
+            console.log("need to check more")
+            ++x
+            ++y
+            achievedCells.push([x, y])
+          }
+        } else {
+          console.log("Cant check rightdown")
+          achievedCells = []
+          return false
+        }
+      }
+    }
     
     let winner
     function checkWin(x, y, cell)
     {
-      checkBack(x, y, cell)
-      console.log("Checkback found")
-      console.log(achievedCells)
-      updateCells(achievedCells, cell)
-      checkFront(x, y, cell)
-      console.log("Checkback found")
-      console.log(achievedCells)
-      updateCells(achievedCells, cell)
-      
+      if(checkBack(x, y, cell))
+      {
+        console.log("Checkback found")
+        console.log(achievedCells)
+        updateCells(achievedCells, cell)
+        achievedCells = []
+      }
+      if(checkFront(x, y, cell))
+      {
+        console.log("Checkfront found")
+        console.log(achievedCells)
+        updateCells(achievedCells, cell)
+        achievedCells = []
+      }
+      if(checkUp(x, y, cell))
+      {
+        console.log("checkup found")
+        console.log(achievedCells)
+        updateCells(achievedCells, cell)
+        achievedCells = []
+      }
+      if(checkDown(x, y, cell))
+      {
+        console.log("Checkdown found")
+        console.log(achievedCells)
+        updateCells(achievedCells, cell)
+        achievedCells = []
+      }
+      if(checkLeftUp(x, y, cell))
+      {
+        console.log("CheckLeftUp found")
+        console.log(achievedCells)
+        updateCells(achievedCells, cell)
+        achievedCells = []
+      }
+      if(checkRightUp(x, y, cell))
+      {
+        console.log("CheckLeftUp found")
+        console.log(achievedCells)
+        updateCells(achievedCells, cell)
+        achievedCells = []
+      }
+      if(checkLeftDown(x, y, cell))
+      {
+        console.log("CheckLeftUp found")
+        console.log(achievedCells)
+        updateCells(achievedCells, cell)
+        achievedCells = []
+      }
+      if(CheckRightDown(x, y, cell))
+      {
+        console.log("CheckRightDown found")
+        console.log(achievedCells)
+        updateCells(achievedCells, cell)
+        achievedCells = []
+      }
     }
 
     function clickEvent (cellIndex, rowIndex, cell)
