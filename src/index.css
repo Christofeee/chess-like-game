@@ -1,4 +1,7 @@
 body {
+  background-image: url('bg2.jpg');
+  background-attachment: fixed;
+  background-size: cover;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -17,7 +20,7 @@ code {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgb(68, 68, 68);
+  background-color: rgba(0, 0, 0, 0.507);
   /* min-height: 500px;
   display: flex;
   flex-direction: column;
@@ -51,7 +54,7 @@ code {
   border: 2px rgb(98, 0, 255) solid;
   padding: 30px;
   border-radius: 20px;
-  box-shadow: 1px 5px 40px black;
+  box-shadow: 0 0 1000px #6f00ff;
 }
 
 .cell {
@@ -60,8 +63,9 @@ code {
   height: 100px;
   color: aqua;
   background-color:rgb(98, 0, 255);
-  box-shadow: 5px 10px 10px black;
-  text-shadow: 1px 1px 30px cyan;
+  /* box-shadow: 5px 10px 10px rgb(2, 2, 2); */
+  box-shadow: 0 0 1000px #6f00ff;
+  text-shadow: 1px 1px 20px rgb(0, 0, 0);
   /* margin: 30px; */
   border-radius: 7px;
   border-color: black;
@@ -70,6 +74,7 @@ code {
 }
 .cell:hover {
   background-color:rgb(70, 0, 184);
+  transition: background-color 0.5s ease-in-out;
 }
 #board {
   z-index: 1;
@@ -122,4 +127,7 @@ code {
 }
 #turn {
   color: rgb(255, 220, 154);
+  box-shadow: 1px 10px 50px  black;
+  padding: 20px;
+  text-shadow: 0 0 10px rgb(255, 192, 119);
 }
